@@ -3,14 +3,18 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export async function signIn(_prev: string | null, formData: FormData) {
+type SignInState = { error: string; email: string } | null;
+
+export async function signIn(_prev: SignInState, formData: FormData): Promise<SignInState> {
+  const email = String(formData.get("email") ?? "");
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({
-    email: String(formData.get("email") ?? ""),
+    email,
     password: String(formData.get("password") ?? ""),
   });
 
-  if (error) return "Wrong email or password.";
+  // Send the email back so the form can keep it filled in.
+  if (error) return { error: "Wrong email or password.", email };
   redirect("/");
 }
 

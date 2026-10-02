@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { signIn } from "./actions";
 
 export default function LoginPage() {
-  const [error, formAction, pending] = useActionState(signIn, null);
+  const [state, formAction, pending] = useActionState(signIn, null);
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
@@ -15,13 +15,13 @@ export default function LoginPage() {
         <form action={formAction} className="space-y-4">
           <div>
             <label className="label" htmlFor="email">Email</label>
-            <input className="input" id="email" name="email" type="email" required autoComplete="email" />
+            <input className="input" id="email" name="email" type="email" required autoComplete="email" defaultValue={state?.email} key={state?.email} />
           </div>
           <div>
             <label className="label" htmlFor="password">Password</label>
             <input className="input" id="password" name="password" type="password" required autoComplete="current-password" />
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
           <button className="btn w-full" disabled={pending}>
             {pending ? "Signing in…" : "Sign in"}
           </button>
