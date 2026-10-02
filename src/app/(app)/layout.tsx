@@ -1,14 +1,14 @@
 import { getCurrentProfile } from "@/lib/auth";
 import { signOut } from "@/app/login/actions";
-import { NavLinks } from "./nav-links";
+import { BottomNav, NavLinks } from "./nav-links";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const profile = await getCurrentProfile();
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-4 px-4 py-3">
+    <div className="min-h-screen pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
           <span className="font-semibold">VK Home Solutions</span>
           <NavLinks />
           <div className="ml-auto flex items-center gap-3 text-sm">
@@ -19,7 +19,8 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-4 md:py-6">{children}</main>
+      <BottomNav />
     </div>
   );
 }

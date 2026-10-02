@@ -75,7 +75,7 @@ To stop the app, go back to the terminal and press **Ctrl + C**.
 ## Build progress
 
 - [x] Step 0: Setup and login
-- [ ] Step 1: Seller leads
+- [x] Step 1: Seller leads
 - [ ] Step 2: Activity log
 - [ ] Step 3: Pipeline board
 - [ ] Step 4: Deal calculator
